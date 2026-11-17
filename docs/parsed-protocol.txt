@@ -30,10 +30,10 @@ must never produce a measurement or establish a host baseline. Stable generation
 are even. Instant invalidation increments by2; paired UI begin/end each add1.
 No timestamps, calibration accuracy or boot-unique ID claimed.
 
-Mapping authority: ../research-protocol/stock-display-map.json and its cited
+Mapping authority: stock-display-map.json and its cited
 stock renderer. Firmware input SHA25683271baa03bcbf15200cfb80fa92a8cd0d7c37889b088d382098dcd2c9e0d2b3.
 Raw FNT1 packets remain a separate diagnostic format, not correlated by index.
 USB integration uses device-to-host vendor EP0 requests: identity0x50 and
 parsed0x51, bmRequestType0xc0, wValue0x3154, wIndex0, wLength64.
-See ../transport/transport.h and ../transport/transport.c for exact validation.
+See ../firmware/transport/transport.h and ../firmware/transport/transport.c for exact validation.
 FNI1 identity declares the compiled stock target; it is not runtime attestation.

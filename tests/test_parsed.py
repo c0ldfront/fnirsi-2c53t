@@ -31,7 +31,7 @@ def empty(flags=0):
 class DecoderTests(unittest.TestCase):
     def test_authoritative_map(self):
         authority = json.loads((pathlib.Path(__file__).resolve().parent.parent /
-                                'research-protocol/stock-display-map.json').read_text())
+                                'docs/stock-display-map.json').read_text())
         self.assertEqual(list(UNITS), [v['label'] for v in authority['units']])
         self.assertEqual(list(SPECIAL[1:]), [v['label'] for v in authority['special_results']])
 

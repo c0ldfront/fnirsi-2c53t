@@ -1,6 +1,6 @@
 #ifndef FNIRSI_STOCK_ADAPTER_H
 #define FNIRSI_STOCK_ADAPTER_H
-#include "../research-design-review/stock_usb_layout.h"
+#include "../include/stock_usb_layout.h"
 #include "../transport/transport.h"
 
 /* This adapter targets the pinned 32-bit ARM image, not host-native pointers. */

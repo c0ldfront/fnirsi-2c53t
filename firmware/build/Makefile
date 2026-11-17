@@ -3,7 +3,7 @@ SHELL := /bin/bash
 .SHELLFLAGS := -eu -o pipefail -c
 CROSS ?= arm-none-eabi-
 OUT ?= out
-STOCK ?= ../../downloads/APP_2C53T_V1.0.7_241205.bin
+STOCK ?= ../../local/downloads/APP_2C53T_V1.0.7_241205.bin
 C_SOURCES := ../payload/parsed.c ../payload/parsed_binding.c ../transport/transport.c ../adapter/stock_adapter.c ../adapter/lifecycle.c
 ASM_SOURCES := ../payload/parsed_hooks.S ../payload/key_hook.S ../adapter/lifecycle_hooks.S stock_symbols.S
 CFLAGS := -Os -Wall -Wextra -Werror -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -fno-common -fno-unwind-tables -fno-asynchronous-unwind-tables -fstack-usage -Wa,--noexecstack
@@ -11,7 +11,7 @@ CFLAGS := -Os -Wall -Wextra -Werror -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -ff
 all: check-input
 	mkdir -p "$$(dirname '$(OUT)')"
 	mkdir '$(OUT)'
-	sha256sum $(C_SOURCES) $(ASM_SOURCES) ../payload/*.h ../transport/*.h ../adapter/*.h payload.ld Makefile input-contract.json plan.py > '$(OUT)/sources.sha256'
+	sha256sum $(C_SOURCES) $(ASM_SOURCES) ../payload/*.h ../transport/*.h ../adapter/*.h ../include/*.h payload.ld Makefile input-contract.json plan.py > '$(OUT)/sources.sha256'
 	@for src in $(C_SOURCES); do $(CROSS)gcc $(CFLAGS) -c "$$src" -o '$(OUT)'/"$$(basename "$$src" .c).o"; done
 	@for src in $(ASM_SOURCES); do $(CROSS)gcc $(CFLAGS) -c "$$src" -o '$(OUT)'/"$$(basename "$$src" .S).o"; done
 	$(CROSS)gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -nostdlib -Wl,--fatal-warnings -Wl,--orphan-handling=error -Wl,--build-id=none -Wl,-T,payload.ld -Wl,-Map,'$(OUT)/payload.map' $(foreach s,$(C_SOURCES),$(OUT)/$(notdir $(s:.c=.o))) $(foreach s,$(ASM_SOURCES),$(OUT)/$(notdir $(s:.S=.o))) -o '$(OUT)/payload.elf'
