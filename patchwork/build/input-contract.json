@@ -1,0 +1,93 @@
+{
+  "status": "offline-reviewed; hardware-unvalidated; do-not-flash",
+  "input_size": 486720,
+  "input_sha256": "83271baa03bcbf15200cfb80fa92a8cd0d7c37889b088d382098dcd2c9e0d2b3",
+  "application_base": "0x08007000",
+  "append_base": "0x0807dd40",
+  "append_end_exclusive_design_cap": "0x08080000",
+  "required_reviewed_sites": [
+    {
+      "address": "0x08038dc4",
+      "file_offset": "0x31dc4",
+      "original": "06f006fe",
+      "proposed_target": "parser_wait_hook",
+      "kind": "Thumb BL"
+    },
+    {
+      "address": "0x0803945e",
+      "file_offset": "0x3245e",
+      "original": "84f8ed9e",
+      "proposed_target": "numeric_commit_hook",
+      "kind": "Thumb B.W"
+    },
+    {
+      "address": "0x08037316",
+      "file_offset": "0x30316",
+      "original": "4ff40050",
+      "replacement": "4ff4fc50",
+      "kind": "heap reserve 128"
+    },
+    {
+      "address": "0x0803b570",
+      "file_offset": "0x34570",
+      "original": "8047cde7",
+      "proposed_target": "key_callback_hook",
+      "kind": "Thumb B.W replacing BLX r0 and loop branch"
+    },
+    {
+      "address": "0x080296e2",
+      "file_offset": "0x226e2",
+      "original": "8022",
+      "replacement": "c022",
+      "kind": "RX task stack allocation 128 to192 words",
+      "reason": "Add256bytes RX stack margin for parsed hook and measured stock formatting paths; hardware worst-case unverified"
+    },
+    {
+      "address": "0x8025e14",
+      "file_offset": "0x1ee14",
+      "original": "8eb045f64041",
+      "proposed_target": "flash_shutdown_hook",
+      "kind": "Thumb B.W",
+      "reason": "Experimental USB lifecycle flash_shutdown_hook; original displaced instructions relocated"
+    },
+    {
+      "address": "0x8038d40",
+      "file_offset": "0x31d40",
+      "original": "06f060fd",
+      "proposed_target": "usb_lifecycle_receive",
+      "kind": "Thumb BL",
+      "reason": "Experimental reviewed USB lifecycle usb_lifecycle_receive"
+    },
+    {
+      "address": "0x8038d6a",
+      "file_offset": "0x31d6a",
+      "original": "06f04bfd",
+      "proposed_target": "usb_lifecycle_receive",
+      "kind": "Thumb BL",
+      "reason": "Experimental reviewed USB lifecycle usb_lifecycle_receive"
+    },
+    {
+      "address": "0x800ef8e",
+      "file_offset": "0x7f8e",
+      "original": "45f64040",
+      "proposed_target": "sharing_enable_hook",
+      "kind": "Thumb B.W",
+      "reason": "Experimental reviewed USB lifecycle sharing_enable_hook"
+    }
+  ],
+  "experimental_not_in_candidate": [
+    {
+      "address": "0x0802afb6",
+      "original": "14f087fb",
+      "reason": "Raw UART capture intentionally excluded from parsed-only candidate"
+    }
+  ],
+  "unresolved": [
+    "final all-patched-image end-to-end emulation",
+    "whole-system stack bound",
+    "factory IAP acceptance and tested recovery",
+    "physical USB/timing/measurement validation"
+  ],
+  "lifecycle_inputs_validated": true,
+  "lifecycle_validation_scope": "Root reviewed source and reran isolated lifecycle tests. RTOS/MMIO behavior modeled/stubbed; no hardware, timing, updater or USB-wire validation."
+}

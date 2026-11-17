@@ -1,0 +1,39 @@
+Parsed telemetry protocol v1 — experimental candidate implemented
+
+64-byte little-endian packet, no padding or implicit fields:
+0..3 ASCII FNP1; 4 version1; 5 size64;
+6 flags: bit0 numeric-commit observed, bit1 BUSY, bit2 sample present,
+  bit3 captured global mode is meter (1). All other bits zero.
+7 captured global mode (stock RAM20001018).
+8..11 completed-parser sample counter modulo2^32.
+12..15 semantic session generation modulo2^32 (not raw frame correlation).
+16..31 byte-exact copy of RAM20000fdc..20000feb:
+  packet20..23 float32,24 decimals,25 special result,28 unit index.
+32 captured relative-mode flag (RAM20000fed);33..59 reserved zero.
+60..63 CRC-32/ISO-HDLC over0..59, compatible with zlib.crc32.
+
+BUSY response: flags exactly2, mode/sequence/state/relative all zero.
+Before first publish: flags/mode/sequence/state/relative all zero.
+Numeric commit flag means the normal numeric-update hook fired in the completed
+parser iteration. It is independent of nonzero result status. No second scaling
+by decimal exponent: stock float already contains the processed number.
+Host requires sample-present, meter flag, mode1, non-BUSY, result0, numeric flag,
+finite float, decimals0..4 and unit0..13 before emitting a numeric reading.
+UnitFF is explicitly no-unit and is not a usable numeric measurement in v1.
+Special result1..9 emits a named status, never a number. An unchanged counter
+does not refresh freshness age. New connection resets host freshness state.
+Generation changes reset host freshness baseline; require counter advancement
+within that generation before showing a new reading. Firmware must suppress
+publications from parses begun before an invalidating transition and gate old
+generation replies. Odd generations denote a UI transaction in progress and
+must never produce a measurement or establish a host baseline. Stable generations
+are even. Instant invalidation increments by2; paired UI begin/end each add1.
+No timestamps, calibration accuracy or boot-unique ID claimed.
+
+Mapping authority: ../research-protocol/stock-display-map.json and its cited
+stock renderer. Firmware input SHA25683271baa03bcbf15200cfb80fa92a8cd0d7c37889b088d382098dcd2c9e0d2b3.
+Raw FNT1 packets remain a separate diagnostic format, not correlated by index.
+USB integration uses device-to-host vendor EP0 requests: identity0x50 and
+parsed0x51, bmRequestType0xc0, wValue0x3154, wIndex0, wLength64.
+See ../transport/transport.h and ../transport/transport.c for exact validation.
+FNI1 identity declares the compiled stock target; it is not runtime attestation.

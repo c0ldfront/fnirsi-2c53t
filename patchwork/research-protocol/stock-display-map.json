@@ -1,0 +1,152 @@
+{
+  "sha256": "83271baa03bcbf15200cfb80fa92a8cd0d7c37889b088d382098dcd2c9e0d2b3",
+  "evidence": "renderer.c.txt:321-329,477-478 plus pinned binary pointer/string reads",
+  "units": [
+    {
+      "index": 0,
+      "pointer_address": "0x8044018",
+      "string_address": "0x807bbc9",
+      "label": "mV"
+    },
+    {
+      "index": 1,
+      "pointer_address": "0x804401c",
+      "string_address": "0x807bbca",
+      "label": "V"
+    },
+    {
+      "index": 2,
+      "pointer_address": "0x8044020",
+      "string_address": "0x807d38e",
+      "label": "Ω"
+    },
+    {
+      "index": 3,
+      "pointer_address": "0x8044024",
+      "string_address": "0x807d38d",
+      "label": "kΩ"
+    },
+    {
+      "index": 4,
+      "pointer_address": "0x8044028",
+      "string_address": "0x807d389",
+      "label": "MΩ"
+    },
+    {
+      "index": 5,
+      "pointer_address": "0x804402c",
+      "string_address": "0x807bada",
+      "label": "nF"
+    },
+    {
+      "index": 6,
+      "pointer_address": "0x8044030",
+      "string_address": "0x807badd",
+      "label": "uF"
+    },
+    {
+      "index": 7,
+      "pointer_address": "0x8044034",
+      "string_address": "0x807bad7",
+      "label": "mF"
+    },
+    {
+      "index": 8,
+      "pointer_address": "0x8044038",
+      "string_address": "0x807bade",
+      "label": "F"
+    },
+    {
+      "index": 9,
+      "pointer_address": "0x804403c",
+      "string_address": "0x807ccb5",
+      "label": "℃"
+    },
+    {
+      "index": 10,
+      "pointer_address": "0x8044040",
+      "string_address": "0x807ba83",
+      "label": "uA"
+    },
+    {
+      "index": 11,
+      "pointer_address": "0x8044044",
+      "string_address": "0x807ba80",
+      "label": "mA"
+    },
+    {
+      "index": 12,
+      "pointer_address": "0x8044048",
+      "string_address": "0x807ba84",
+      "label": "A"
+    },
+    {
+      "index": 13,
+      "pointer_address": "0x804404c",
+      "string_address": "0x807cd32",
+      "label": "℉"
+    }
+  ],
+  "special_results": [
+    {
+      "index": 1,
+      "pointer_address": "0x80150d8",
+      "label": "AUTO"
+    },
+    {
+      "index": 2,
+      "pointer_address": "0x80150dc",
+      "label": ".OL"
+    },
+    {
+      "index": 3,
+      "pointer_address": "0x80150e0",
+      "label": " "
+    },
+    {
+      "index": 4,
+      "pointer_address": "0x80150e4",
+      "label": "CAL"
+    },
+    {
+      "index": 5,
+      "pointer_address": "0x80150e8",
+      "label": "PAS"
+    },
+    {
+      "index": 6,
+      "pointer_address": "0x80150ec",
+      "label": "Er1"
+    },
+    {
+      "index": 7,
+      "pointer_address": "0x80150f0",
+      "label": "Er2"
+    },
+    {
+      "index": 8,
+      "pointer_address": "0x80150f4",
+      "label": "Er3"
+    },
+    {
+      "index": 9,
+      "pointer_address": "0x80150f8",
+      "label": "ErC"
+    }
+  ],
+  "numeric_formats": [
+    "%.0f",
+    "%.1f",
+    "%.2f",
+    "%.3f",
+    "%.4f"
+  ],
+  "state": {
+    "float32_le": "0x20000fe0",
+    "decimal_places": "0x20000fe4",
+    "special_result": "0x20000fe5",
+    "unit_index": "0x20000fe8",
+    "relative_flag": "0x20000fed"
+  },
+  "caveat": "Numeric result zero is insufficient freshness: invalid glyph paths retain old value and result. Require numeric commit indicator."
+}
